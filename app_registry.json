@@ -1,0 +1,25 @@
+{
+  "apps": {
+    "com.cyberspaceltd.ltemobile": {
+      "appName": "CyberSpace Nexus",
+      "appId": "com.cyberspaceltd.ltemobile",
+      "latestVersion": "1.0.12",
+      "minRequiredVersion": "1.0.11",
+      "playStoreUrl": "https://play.google.com/store/apps/details?id=com.cyberspaceltd.ltemobile",
+      "appStoreUrl": "https://apps.apple.com/app/cyberspace-nexus/id6745322533",
+      "releaseNotes": "- Bug fixes and performance improvements.\n- Updated UI for better user experience.",
+      "updatePriority": "recommended"
+    },
+
+    "com.myorg.anotherone": {
+      "appName": "Another One",
+      "appId": "com.myorg.anotherone",
+      "latestVersion": "1.1.0",
+      "minRequiredVersion": "1.0.0",
+      "playStoreUrl": "https://play.google.com/store/apps/details?id=com.myorg.anotherone",
+      "appStoreUrl": "https://apps.apple.com/app/another-one/id9876543210",
+      "releaseNotes": null,
+      "updatePriority": "optional"
+    }
+  }
+}
