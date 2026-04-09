@@ -44,4 +44,34 @@ class AppEntry {
     this.releaseNotes,
     this.updatePriority = UpdatePriority.optional,
   });
+
+   /// Deserializes an [AppEntry] from a JSON map.
+  ///
+  /// The `updatePriority` field maps from the strings `"optional"`,
+  /// `"recommended"`, and `"forced"`.
+  factory AppEntry.fromJson(Map<String, dynamic> json) {
+    return AppEntry(
+      appName: json['appName'] as String,
+      appId: json['appId'] as String,
+      latestVersion: json['latestVersion'] as String,
+      minRequiredVersion: json['minRequiredVersion'] as String,
+      playStoreUrl: json['playStoreUrl'] as String,
+      appStoreUrl: json['appStoreUrl'] as String,
+      releaseNotes: json['releaseNotes'] as String?,
+      updatePriority: _parsePriority(json['updatePriority'] as String?),
+    );
+  }
+
+  static UpdatePriority _parsePriority(String? value) {
+    switch (value) {
+      case 'forced':
+        return UpdatePriority.forced;
+      case 'recommended':
+        return UpdatePriority.recommended;
+      case 'optional':
+      default:
+        return UpdatePriority.optional;
+    }
+  }
+
 }
