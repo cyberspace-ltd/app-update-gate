@@ -1,0 +1,22 @@
+name: app_update_gate
+description: >
+  Centralized remote version registry and force-update gate for Flutter app
+  portfolios. Manage version enforcement across multiple apps from a single
+  Git-hosted package.
+version: 1.0.0
+homepage: https://github.com/myorg/app_update_gate
+
+environment:
+  sdk: ">=3.0.0 <4.0.0"
+  flutter: ">=3.10.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  url_launcher: ^6.2.0
+  package_info_plus: ^8.0.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^5.0.0
