@@ -21,8 +21,10 @@ class VersionCheckResult {
 /// Compares the running app version against the centralized [AppRegistry]
 /// and returns an [UpdateStatus].
 ///
-/// This service contains **no network calls** — all data comes from the
-/// compile-time registry baked into the package.
+/// Supports two modes:
+/// - **Local** (synchronous): Uses the compile-time [AppRegistry] lookup.
+/// - **Pre-fetched**: Call [evaluate] with an [AppEntry] already retrieved
+///   from [RemoteRegistryService].
 class VersionCheckerService {
   /// Creates a [VersionCheckerService].
   ///
@@ -34,20 +36,32 @@ class VersionCheckerService {
 
   final AppEntry? Function(String appId) _lookup;
 
-  /// Checks the [currentVersion] of the app identified by [appId] against
-  /// the registry and returns a [VersionCheckResult].
+  /// Checks using the **local** compile-time registry.
   ///
-  /// ```dart
-  /// final result = const VersionCheckerService().check(
-  ///   appId: 'com.myorg.coolapp',
-  ///   currentVersion: '2.3.0',
-  /// );
-  /// ```
+  /// Prefer [evaluate] with a remotely-fetched [AppEntry] in production.
   VersionCheckResult check({
     required String appId,
     required String currentVersion,
   }) {
     final entry = _lookup(appId);
+    return evaluate(entry: entry, currentVersion: currentVersion);
+  }
+
+  /// Pure comparison logic — evaluates a pre-fetched (or local) [AppEntry].
+  ///
+  /// If [entry] is `null`, returns [UpdateStatus.appNotFound].
+  ///
+  /// ```dart
+  /// final entry = await remoteRegistry.lookup('com.myorg.coolapp');
+  /// final result = VersionCheckerService.evaluate(
+  ///   entry: entry,
+  ///   currentVersion: '2.3.0',
+  /// );
+  /// ```
+  static VersionCheckResult evaluate({
+    required AppEntry? entry,
+    required String currentVersion,
+  }) {
     if (entry == null) {
       return const VersionCheckResult(status: UpdateStatus.appNotFound);
     }
