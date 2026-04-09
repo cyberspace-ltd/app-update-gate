@@ -28,30 +28,30 @@ class AppRegistry {
   ///
   /// Keyed by `appId` (bundle identifier) for O(1) lookup.
   static const Map<String, AppEntry> apps = {
-    'com.myorg.coolapp': AppEntry(
-      appName: 'Cool App',
-      appId: 'com.myorg.coolapp',
-      latestVersion: '2.4.1',
-      minRequiredVersion: '2.0.0',
+    'com.cyberspaceltd.ltemobile': AppEntry(
+      appName: 'CybyrSpace Nexus',
+      appId: 'com.cyberspaceltd.ltemobile',
+      latestVersion: '1.0.12',
+      minRequiredVersion: '1.0.11',
       playStoreUrl:
-          'https://play.google.com/store/apps/details?id=com.myorg.coolapp',
+      'https://play.google.com/store/apps/details?id=com.cyberspaceltd.ltemobile',
       appStoreUrl:
-          'https://apps.apple.com/app/cool-app/id1234567890',
+          'https://apps.apple.com/us/app/cyberspace-nexus/id6745322533',
       releaseNotes: 'Bug fixes and performance improvements.',
       updatePriority: UpdatePriority.recommended,
     ),
-    'com.myorg.anotherone': AppEntry(
-      appName: 'Another One',
-      appId: 'com.myorg.anotherone',
-      latestVersion: '1.1.0',
-      minRequiredVersion: '1.0.0',
-      playStoreUrl:
-          'https://play.google.com/store/apps/details?id=com.myorg.anotherone',
-      appStoreUrl:
-          'https://apps.apple.com/app/another-one/id9876543210',
-      releaseNotes: null,
-      updatePriority: UpdatePriority.optional,
-    ),
+    // 'com.myorg.anotherone': AppEntry(
+    //   appName: 'Another One',
+    //   appId: 'com.myorg.anotherone',
+    //   latestVersion: '1.1.0',
+    //   minRequiredVersion: '1.0.0',
+    //   playStoreUrl:
+    //       'https://play.google.com/store/apps/details?id=com.myorg.anotherone',
+    //   appStoreUrl:
+    //       'https://apps.apple.com/app/another-one/id9876543210',
+    //   releaseNotes: null,
+    //   updatePriority: UpdatePriority.optional,
+    // ),
 
   };
 
