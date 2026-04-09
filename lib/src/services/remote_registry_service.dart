@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:app_update_gate/src/config/app_update_gate_config.dart';
 import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
 
@@ -21,7 +22,7 @@ class RemoteRegistryService {
   /// ```
   /// https://raw.githubusercontent.com/<org>/<repo>/main/app_registry.json
   /// ```
-  final String registryUrl;
+  final String? registryUrl;
 
   /// HTTP request timeout.
   final Duration timeout;
@@ -62,7 +63,7 @@ class RemoteRegistryService {
 
     try {
       final response = await client
-          .get(Uri.parse(registryUrl))
+          .get(Uri.parse(registryUrl??AppUpdateGateConfig.registryUrl))
           .timeout(timeout);
 
       if (response.statusCode != 200) {
