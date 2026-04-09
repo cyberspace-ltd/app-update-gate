@@ -31,7 +31,7 @@ class AppRegistry {
     'com.cyberspaceltd.ltemobile': AppEntry(
       appName: 'CybyrSpace Nexus',
       appId: 'com.cyberspaceltd.ltemobile',
-      latestVersion: '1.0.12',
+      latestVersion: '1.0.15',
       minRequiredVersion: '1.0.11',
       playStoreUrl:
       'https://play.google.com/store/apps/details?id=com.cyberspaceltd.ltemobile',
