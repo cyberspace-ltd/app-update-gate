@@ -33,6 +33,9 @@ class AppUpdateGate {
   ///
   /// [appId] — The bundle identifier registered in [AppRegistry].
   ///
+  /// [registryUrl] — Optional URL to remote registry. If omitted, uses the
+  /// default URL from [AppUpdateGateConfig].
+  ///
   /// [currentVersion] — The running semantic version string. If omitted,
   /// the version is automatically read from the app's platform metadata
   /// via `package_info_plus`.
@@ -44,9 +47,9 @@ class AppUpdateGate {
   static Future<UpdateStatus> check({
     required BuildContext context,
     required String appId,
+    String? registryUrl,
     String? currentVersion,
     UpdateDialogTheme dialogTheme = const UpdateDialogTheme(),
-    VersionCheckerService service = const VersionCheckerService(),
   }) async {
     final version = currentVersion ?? await _resolveVersion();
     final result = service.check(appId: appId, currentVersion: version);
