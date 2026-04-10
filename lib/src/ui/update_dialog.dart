@@ -251,6 +251,9 @@ Future<void> _launchStore(AppEntry entry) async {
   }
 
   if (!_isStoreUrl(url)) {
+    debugPrint(
+      '[AppUpdateGate] ⛔ Blocked launch — URL is not a recognized store domain: $url',
+    );
     return;
   }
 
