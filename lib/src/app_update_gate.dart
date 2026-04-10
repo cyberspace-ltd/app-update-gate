@@ -51,8 +51,12 @@ class AppUpdateGate {
     String? currentVersion,
     UpdateDialogTheme dialogTheme = const UpdateDialogTheme(),
   }) async {
+    debugPrint('[AppUpdateGate] ── Version check started ──');
+    debugPrint('[AppUpdateGate] appId: $appId');
+
     // Resolve the running version.
     final version = currentVersion ?? await _resolveVersion();
+    debugPrint('[AppUpdateGate] Running version: $version');
 
     // Fetch entry from remote registry (falls back to local on failure).
     final url = registryUrl ?? AppUpdateGateConfig.registryUrl;
@@ -67,6 +71,9 @@ class AppUpdateGate {
       entry: entry,
       currentVersion: version,
     );
+
+    debugPrint('[AppUpdateGate] Result: ${result.status}');
+    debugPrint('[AppUpdateGate] ── Version check complete ──');
 
     if (!context.mounted) return result.status;
 
