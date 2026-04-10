@@ -51,12 +51,26 @@ class AppUpdateGate {
     String? currentVersion,
     UpdateDialogTheme dialogTheme = const UpdateDialogTheme(),
   }) async {
+    // Resolve the running version.
     final version = currentVersion ?? await _resolveVersion();
-    final result = service.check(appId: appId, currentVersion: version);
 
-      debugPrint('Version check result: current version=$version, status=${result.status}, entry=${result.entry}'); 
+    // Fetch entry from remote registry (falls back to local on failure).
+    final url = registryUrl ?? AppUpdateGateConfig.registryUrl;
+    final remoteService = RemoteRegistryService(
+      registryUrl: url,
+      timeout: AppUpdateGateConfig.fetchTimeout,
+    );
+    final entry = await remoteService.lookup(appId);
+
+    // Evaluate.
+    final result = VersionCheckerService.evaluate(
+      entry: entry,
+      currentVersion: version,
+    );
+
     if (!context.mounted) return result.status;
 
+    // Show dialog if needed.
     if (result.status != UpdateStatus.upToDate &&
         result.status != UpdateStatus.appNotFound &&
         result.entry != null) {
