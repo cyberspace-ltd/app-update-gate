@@ -1,5 +1,5 @@
 import 'dart:convert';
-
+import 'dart:developer' as developer;
 import 'package:app_update_gate/src/config/app_update_gate_config.dart';
 import 'package:http/http.dart' as http;
 
@@ -42,11 +42,21 @@ class RemoteRegistryService {
   ///
   /// If the fetch fails for any reason, falls back to the local
   /// compile-time [AppRegistry].
-  Future<AppEntry?> lookup(String appId) async {
+ Future<AppEntry?> lookup(String appId) async {
+    developer.log('[AppUpdateGate] Fetching registry from: $registryUrl');
     try {
       final entries = await fetchAll();
-      return entries[appId];
+      developer.log('[AppUpdateGate] Remote fetch succeeded. Found ${entries.length} app(s): ${entries.keys.toList()}');
+      final entry = entries[appId];
+      if (entry == null) {
+        developer.log('[AppUpdateGate] ⚠️ appId "$appId" NOT found in remote registry');
+      } else {
+        developer.log('[AppUpdateGate] ✅ Found "$appId" → latest: ${entry.latestVersion}, min: ${entry.minRequiredVersion}, priority: ${entry.updatePriority}');
+      }
+      return entry;
     } catch (e) {
+      developer.log('[AppUpdateGate] ❌ Remote fetch FAILED: $e');
+      developer.log('[AppUpdateGate] Falling back to local registry...');
       return AppRegistry.lookup(appId);
     }
   }
