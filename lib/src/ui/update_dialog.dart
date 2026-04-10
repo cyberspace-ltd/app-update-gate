@@ -187,7 +187,8 @@ class _UpdateDialogContent extends StatelessWidget {
                   : null,
             ),
           ),
-        Expanded(
+        SizedBox(
+          width: double.infinity,
           child: FilledButton(
             style: FilledButton.styleFrom(backgroundColor: primary),
             onPressed: () async {
