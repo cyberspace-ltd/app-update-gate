@@ -1,7 +1,9 @@
 import 'package:flutter/widgets.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 
+import 'package:app_update_gate/src/config/app_update_gate_config.dart';
 import 'package:app_update_gate/src/models/update_status.dart';
+import 'package:app_update_gate/src/services/remote_registry_service.dart';
 import 'package:app_update_gate/src/services/version_checker_service.dart';
 import 'package:app_update_gate/src/ui/update_dialog.dart';
 
