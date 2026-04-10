@@ -85,6 +85,8 @@ Future<bool?> showUpdateDialog({
   }
 }
 
+// ── Private helpers ──────────────────────────────────────────────────────
+
 Future<bool> _showDismissibleDialog({
   required BuildContext context,
   required AppEntry entry,
@@ -211,6 +213,32 @@ class _UpdateDialogContent extends StatelessWidget {
   }
 }
 
+/// Allowed domains for store URLs — prevents malicious redirects if the
+/// registry JSON is tampered with.
+const _allowedStoreDomains = {
+  'play.google.com',
+  'apps.apple.com',
+  'itunes.apple.com',
+  'appgallery.huawei.com',
+};
+
+/// Returns `true` if [url] points to a legitimate app store domain.
+bool _isStoreUrl(String url) {
+  try {
+    final host = Uri.parse(url).host.toLowerCase();
+    return _allowedStoreDomains.any(
+      (domain) => host == domain || host.endsWith('.$domain'),
+    );
+  } catch (_) {
+    return false;
+  }
+}
+
+/// Launches the correct store URL based on the running platform.
+///
+/// Validates that the URL points to a legitimate store domain before
+/// launching. This prevents a compromised registry from redirecting users
+/// to phishing or malware sites.
 Future<void> _launchStore(AppEntry entry) async {
   final String url;
   if (Platform.isAndroid) {
@@ -219,6 +247,10 @@ Future<void> _launchStore(AppEntry entry) async {
     url = entry.appStoreUrl;
   } else {
     url = entry.playStoreUrl;
+  }
+
+  if (!_isStoreUrl(url)) {
+    return;
   }
 
   final uri = Uri.parse(url);
