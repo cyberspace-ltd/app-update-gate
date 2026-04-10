@@ -70,7 +70,7 @@ class VersionCheckerService {
     final latest = SemanticVersion.parse(entry.latestVersion);
     final minRequired = SemanticVersion.parse(entry.minRequiredVersion);
 
-    if (running < minRequired) {
+    if (running > minRequired) {
       return VersionCheckResult(status: UpdateStatus.forceUpdate, entry: entry);
     }
 
