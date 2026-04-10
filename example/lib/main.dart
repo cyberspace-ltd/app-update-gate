@@ -38,8 +38,8 @@ class _HomeScreenState extends State<HomeScreen> {
     // ── Option A: Explicit version ──────────────────────────────────────
     final status = await AppUpdateGate.check(
       context: context,
-      appId: 'com.myorg.coolapp',
-      currentVersion: '2.3.0', // Simulate an older version.
+      appId: 'com.cyberspaceltd.ltemobile',
+      currentVersion: '1.0.15', // Simulate an older version.
     );
 
     // ── Option B: Auto-detect version (comment out Option A first) ──────
