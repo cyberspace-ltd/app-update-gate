@@ -1,7 +1,6 @@
 import 'dart:convert';
 
 import 'package:app_update_gate/src/config/app_update_gate_config.dart';
-import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
 
 import 'package:app_update_gate/src/models/app_entry.dart';
@@ -44,20 +43,10 @@ class RemoteRegistryService {
   /// If the fetch fails for any reason, falls back to the local
   /// compile-time [AppRegistry].
   Future<AppEntry?> lookup(String appId) async {
-    debugPrint('[AppUpdateGate] Fetching registry from: $registryUrl');
     try {
       final entries = await fetchAll();
-      debugPrint('[AppUpdateGate] Remote fetch succeeded. Found ${entries.length} app(s): ${entries.keys.toList()}');
-      final entry = entries[appId];
-      if (entry == null) {
-        debugPrint('[AppUpdateGate] ⚠️ appId "$appId" NOT found in remote registry');
-      } else {
-        debugPrint('[AppUpdateGate] ✅ Found "$appId" → latest: ${entry.latestVersion}, min: ${entry.minRequiredVersion}, priority: ${entry.updatePriority}');
-      }
-      return entry;
+      return entries[appId];
     } catch (e) {
-      debugPrint('[AppUpdateGate] ❌ Remote fetch FAILED: $e');
-      debugPrint('[AppUpdateGate] Falling back to local registry...');
       return AppRegistry.lookup(appId);
     }
   }
