@@ -3,7 +3,6 @@ import 'package:app_update_gate/src/models/update_priority.dart';
 import 'package:app_update_gate/src/models/update_status.dart';
 import 'package:app_update_gate/src/registry/app_registry.dart';
 import 'package:app_update_gate/src/utils/semantic_version.dart';
-import 'package:flutter/widgets.dart';
 
 /// The result of a version check, bundling the [status] with the
 /// corresponding [AppEntry] (if found).
@@ -70,7 +69,6 @@ class VersionCheckerService {
     final running = SemanticVersion.parse(currentVersion);
     final latest = SemanticVersion.parse(entry.latestVersion);
     final minRequired = SemanticVersion.parse(entry.minRequiredVersion);
-    debugPrint('Comparing versions: running=$running, latest=$latest, minRequired=$minRequired');
 
     if (running < minRequired) {
       return VersionCheckResult(status: UpdateStatus.forceUpdate, entry: entry);
