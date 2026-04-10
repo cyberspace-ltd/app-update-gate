@@ -3,6 +3,7 @@ import 'package:app_update_gate/src/models/update_priority.dart';
 import 'package:app_update_gate/src/models/update_status.dart';
 import 'package:app_update_gate/src/registry/app_registry.dart';
 import 'package:app_update_gate/src/utils/semantic_version.dart';
+import 'package:flutter/widgets.dart';
 
 /// The result of a version check, bundling the [status] with the
 /// corresponding [AppEntry] (if found).
