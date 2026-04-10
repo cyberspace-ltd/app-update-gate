@@ -1,9 +1,9 @@
+import 'package:app_update_gate/src/config/app_update_gate_config.dart';
+import 'package:app_update_gate/src/services/remote_registry_service.dart';
 import 'package:flutter/widgets.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 
-import 'package:app_update_gate/src/config/app_update_gate_config.dart';
 import 'package:app_update_gate/src/models/update_status.dart';
-import 'package:app_update_gate/src/services/remote_registry_service.dart';
 import 'package:app_update_gate/src/services/version_checker_service.dart';
 import 'package:app_update_gate/src/ui/update_dialog.dart';
 
@@ -51,14 +51,10 @@ class AppUpdateGate {
     String? currentVersion,
     UpdateDialogTheme dialogTheme = const UpdateDialogTheme(),
   }) async {
-    debugPrint('[AppUpdateGate] ── Version check started ──');
-    debugPrint('[AppUpdateGate] appId: $appId');
-
-    // Resolve the running version.
+    // 1. Resolve the running version.
     final version = currentVersion ?? await _resolveVersion();
-    debugPrint('[AppUpdateGate] Running version: $version');
 
-    // Fetch entry from remote registry (falls back to local on failure).
+    // 2. Fetch entry from remote registry (falls back to local on failure).
     final url = registryUrl ?? AppUpdateGateConfig.registryUrl;
     final remoteService = RemoteRegistryService(
       registryUrl: url,
@@ -66,18 +62,15 @@ class AppUpdateGate {
     );
     final entry = await remoteService.lookup(appId);
 
-    // Evaluate.
+    // 3. Evaluate.
     final result = VersionCheckerService.evaluate(
       entry: entry,
       currentVersion: version,
     );
 
-    debugPrint('[AppUpdateGate] Result: ${result.status}');
-    debugPrint('[AppUpdateGate] ── Version check complete ──');
-
     if (!context.mounted) return result.status;
 
-    // Show dialog if needed.
+    // 4. Show dialog if needed.
     if (result.status != UpdateStatus.upToDate &&
         result.status != UpdateStatus.appNotFound &&
         result.entry != null) {
@@ -92,6 +85,7 @@ class AppUpdateGate {
     return result.status;
   }
 
+  /// Reads the running app version via `package_info_plus`.
   static Future<String> _resolveVersion() async {
     final info = await PackageInfo.fromPlatform();
     return info.version;
