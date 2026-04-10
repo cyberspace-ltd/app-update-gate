@@ -70,8 +70,9 @@ class VersionCheckerService {
     final running = SemanticVersion.parse(currentVersion);
     final latest = SemanticVersion.parse(entry.latestVersion);
     final minRequired = SemanticVersion.parse(entry.minRequiredVersion);
+    debugPrint('Comparing versions: running=$running, latest=$latest, minRequired=$minRequired');
 
-    if (running > minRequired) {
+    if (running < minRequired) {
       return VersionCheckResult(status: UpdateStatus.forceUpdate, entry: entry);
     }
 
