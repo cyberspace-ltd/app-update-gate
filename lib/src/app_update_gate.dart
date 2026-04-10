@@ -49,6 +49,7 @@ class AppUpdateGate {
     final version = currentVersion ?? await _resolveVersion();
     final result = service.check(appId: appId, currentVersion: version);
 
+      debugPrint('Version check result: current version=$version, status=${result.status}, entry=${result.entry}'); 
     if (!context.mounted) return result.status;
 
     if (result.status != UpdateStatus.upToDate &&
