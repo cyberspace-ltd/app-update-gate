@@ -3,8 +3,8 @@
     "com.cyberspaceltd.ltemobile": {
       "appName": "CyberSpace Nexus",
       "appId": "com.cyberspaceltd.ltemobile",
-      "latestVersion": "1.0.13",
-      "minRequiredVersion": "1.0.12",
+      "latestVersion": "1.0.15",
+      "minRequiredVersion": "1.0.14",
       "playStoreUrl": "https://play.google.com/store/apps/details?id=com.cyberspaceltd.ltemobile",
       "appStoreUrl": "https://apps.apple.com/app/cyberspace-nexus/id6745322533",
       "releaseNotes": "- Bug fixes and performance improvements.\n- Updated UI for better user experience.",
@@ -13,8 +13,8 @@
     "com.cipm.mobile": {
       "appName": "CIPM Nigeria",
       "appId": "com.cipm.mobile",
-      "latestVersion": "1.0.7+28",
-      "minRequiredVersion": "1.0.7+28",
+      "latestVersion": "1.0.7",
+      "minRequiredVersion": "1.0.7",
       "playStoreUrl": "https://play.google.com/store/apps/details?id=com.cipm.mobile&pcampaignid=web_share",
       "appStoreUrl": "https://apps.apple.com/ng/app/cipm-nigeria/id6755308723",
       "releaseNotes": "- Bug fixes and performance improvements.\n- Updated UI for better user experience.",
