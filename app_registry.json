@@ -13,8 +13,8 @@
     "com.cipm.mobile": {
       "appName": "CIPM Nigeria",
       "appId": "com.cipm.mobile",
-      "latestVersion": "1.0.7",
-      "minRequiredVersion": "1.0.7",
+      "latestVersion": "1.0.8",
+      "minRequiredVersion": "1.0.8",
       "playStoreUrl": "https://play.google.com/store/apps/details?id=com.cipm.mobile&pcampaignid=web_share",
       "appStoreUrl": "https://apps.apple.com/ng/app/cipm-nigeria/id6755308723",
       "releaseNotes": "- Bug fixes and performance improvements.\n- Updated UI for better user experience.",
