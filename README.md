@@ -119,6 +119,8 @@ class _HomeScreenState extends State<HomeScreen> {
 
 ## Customizing the Dialog
 
+### Visual Customization
+
 Pass an `UpdateDialogTheme` to override the default appearance:
 
 ```dart
@@ -137,6 +139,20 @@ await AppUpdateGate.check(
 );
 ```
 
+### Custom Release Notes
+
+Override the registry release notes for a specific check:
+
+```dart
+await AppUpdateGate.check(
+  context: context,
+  appId: 'com.myorg.coolapp',
+  releaseNotes: 'Custom release notes shown in the dialog.\nCan include multiple lines.',
+);
+```
+
+If `releaseNotes` is omitted, the value from `AppRegistry` is used (or `null` if not set).
+
 ---
 
 ## API Reference
@@ -148,6 +164,7 @@ await AppUpdateGate.check(
 | `context`        | `BuildContext`         | ✓        |                                 |
 | `appId`          | `String`               | ✓        |                                 |
 | `currentVersion` | `String?`              |          | Auto-detected via package_info  |
+| `releaseNotes`   | `String?`              |          | From AppRegistry entry          |
 | `dialogTheme`    | `UpdateDialogTheme`    |          | Default Material 3 dialog       |
 
 **Returns:** `Future<UpdateStatus>`
