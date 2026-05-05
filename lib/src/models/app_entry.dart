@@ -74,4 +74,30 @@ class AppEntry {
     }
   }
 
+  /// Creates a copy of this [AppEntry] with optionally overridden fields.
+  ///
+  /// Useful for customizing values like [releaseNotes] at runtime without
+  /// modifying the registry entry.
+  AppEntry copyWith({
+    String? appName,
+    String? appId,
+    String? latestVersion,
+    String? minRequiredVersion,
+    String? playStoreUrl,
+    String? appStoreUrl,
+    String? releaseNotes,
+    UpdatePriority? updatePriority,
+  }) {
+    return AppEntry(
+      appName: appName ?? this.appName,
+      appId: appId ?? this.appId,
+      latestVersion: latestVersion ?? this.latestVersion,
+      minRequiredVersion: minRequiredVersion ?? this.minRequiredVersion,
+      playStoreUrl: playStoreUrl ?? this.playStoreUrl,
+      appStoreUrl: appStoreUrl ?? this.appStoreUrl,
+      releaseNotes: releaseNotes ?? this.releaseNotes,
+      updatePriority: updatePriority ?? this.updatePriority,
+    );
+  }
+
 }
