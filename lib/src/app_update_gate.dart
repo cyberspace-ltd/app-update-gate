@@ -40,6 +40,9 @@ class AppUpdateGate {
   /// the version is automatically read from the app's platform metadata
   /// via `package_info_plus`.
   ///
+  /// [releaseNotes] — Optional custom release notes to override the registry
+  /// entry's release notes. If omitted, uses the notes from [AppRegistry].
+  ///
   /// [dialogTheme] — Optional visual overrides for the update dialog.
   ///
   /// Returns the [UpdateStatus] that was evaluated (useful for logging or
@@ -49,6 +52,7 @@ class AppUpdateGate {
     required String appId,
     String? registryUrl,
     String? currentVersion,
+    String? releaseNotes,
     UpdateDialogTheme dialogTheme = const UpdateDialogTheme(),
   }) async {
     // 1. Resolve the running version.
@@ -74,10 +78,15 @@ class AppUpdateGate {
     if (result.status != UpdateStatus.upToDate &&
         result.status != UpdateStatus.appNotFound &&
         result.entry != null) {
+      // Use custom release notes if provided, otherwise use registry entry's.
+      final entryToDisplay = releaseNotes != null
+          ? result.entry!.copyWith(releaseNotes: releaseNotes)
+          : result.entry!;
+
       await showUpdateDialog(
         context: context,
         status: result.status,
-        entry: result.entry!,
+        entry: entryToDisplay,
         theme: dialogTheme,
       );
     }
