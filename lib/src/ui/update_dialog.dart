@@ -1,6 +1,7 @@
 import 'dart:io' show Platform;
 
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import 'package:app_update_gate/src/models/app_entry.dart';
@@ -159,7 +160,14 @@ class _UpdateDialogContent extends StatelessWidget {
       content: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Icon(icon, size: theme.iconSize, color: iconColor),
+          SvgPicture.asset(
+            'assets/rocket_launch.svg',
+            package: 'app_update_gate',
+            width: theme.iconSize,
+            height: theme.iconSize,
+            colorFilter: ColorFilter.mode(iconColor, BlendMode.srcIn),
+          ),
+          // Icon(icon, size: theme.iconSize, color: iconColor),
           const SizedBox(height: 16),
           Text(
             title,
